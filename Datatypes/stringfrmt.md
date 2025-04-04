@@ -89,7 +89,7 @@ new_sentence = sentence.replace("the", "a", 4)
 print(new_sentence)  # Output: "a quick brown fox a a  jumps over a lazy dog
 
 
-# Split and Join
+# Split and Joins
 words = sentence.split()    # Split into list of words
 print(words)               # ['The', 'quick', 'brown', 'fox', ...]
 " ".join(words)            # Join words back with spaces

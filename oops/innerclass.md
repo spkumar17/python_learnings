@@ -1,63 +1,97 @@
 # Student Class with Inner Section Class
 
-This Python script demonstrates the use of an **inner class** within a `Student` class. The `Section` class is nested inside `Student`, which helps in logical grouping and encapsulation of related attributes.
+## Overview
+This Python program defines a `Student` class that contains an **inner class** called `Section`. The purpose of the inner class is to store and manage the section of a student separately while keeping it encapsulated within the `Student` class.
 
-## Class: `Student`
-The `Student` class represents a student with a name, age, and section.
+## Code Explanation
 
-### Attributes:
-- `name`: Stores the student's name.
-- `age`: Stores the student's age.
-- `sec`: An instance of the inner `Section` class.
+### **1. Outer Class: `Student`**
+The `Student` class represents a student with the following attributes:
+- `name`: The name of the student.
+- `age`: The age of the student.
+- `section`: An instance of the inner `Section` class.
 
-### Methods:
-- `__init__(self, name, age, sec)`: Constructor to initialize the student's name, age, and section.
-- `display_info(self)`: Prints the student's name, age, and section.
+It also includes a method:
+- `display_info()`: Prints the student's name, age, and section.
 
-## Inner Class: `Section`
-The `Section` class is defined inside the `Student` class. It manages the section of the student.
+### **2. Inner Class: `Section`**
+The `Section` class is defined inside `Student` and has:
+- `section`: An attribute to store the section.
+- `get_sec()`: A method to return the section value.
 
-### Attributes:
-- `sec`: Stores the section of the student.
-
-### Methods:
-- `__init__(self, sec)`: Initializes the section attribute.
-- `get_sec(self)`: Returns the section of the student.
-
-## Code Implementation:
+## Code
 ```python
 class Student:
-    def __init__(self, name, age, sec):
+    def __init__(self, name, age, section):
         self.name = name
         self.age = age
-        self.sec = self.Section(sec)
-   
+        self.section = self.Section(section)  # Creating an instance of inner class
+
     def display_info(self):
-        print(f"Student Name: {self.name}, Age: {self.age}, Section: {self.sec.get_sec()}.")
+        print(f"Student Name: {self.name}, Age: {self.age}, Section: {self.section.get_sec()}.")
 
     class Section:
-        def __init__(self, sec):
-            self.sec = sec
+        def __init__(self, section):
+            self.section = section
 
         def get_sec(self):
-            return self.sec
+            return self.section
 
-# Example Usage
+# Creating a Student object
 student1 = Student("Alice", 20, "B")
 student1.display_info()
 
-print(Student.Section.get_sec(student1.sec))
+# Accessing the inner class method
+print(Student.Section.get_sec(student1.section))
 ```
 
-## Explanation:
-1. The `Section` class is an **inner class**, meaning it is defined inside another class (`Student`).
-2. `Student` objects create an instance of `Section` when initialized, ensuring that every student has an associated section.
-3. The method `display_info()` prints the student's details, including the section retrieved from the inner class.
-4. We access the inner class method `get_sec()` through `Student.Section.get_sec(student1.sec)`.
+## **How It Works**
+1. **Creating a Student Instance**:
+   ```python
+   student1 = Student("Alice", 20, "B")
+   ```
+   - Creates an instance of `Student`.
+   - The `section` attribute is set using the `Section` inner class.
 
-## Benefits of Using an Inner Class:
-- **Encapsulation**: Keeps related functionality within the parent class.
-- **Logical Grouping**: The `Section` class is only relevant to `Student`, making the code more organized.
-- **Readability**: Helps in maintaining a structured approach when dealing with complex objects.
+2. **Displaying Student Info**:
+   ```python
+   student1.display_info()
+   ```
+   - Calls `display_info()` which prints the student's details.
 
-This script is a great example of how to implement and use inner classes in Python effectively!
+3. **Accessing Section Data**:
+   ```python
+   print(Student.Section.get_sec(student1.section))
+   ```
+   - Calls `get_sec()` on the `section` instance to retrieve the section name.
+
+## **Expected Output**
+```
+Student Name: Alice, Age: 20, Section: B.
+B
+```
+
+## **Why Use an Inner Class?**
+- Encapsulation: The `Section` class is tightly coupled with `Student`, making it clear that sections are a property of students.
+- Organization: Keeps related functionality together, avoiding clutter in the outer class.
+
+## **Alternative Approach**
+If an inner class is not needed, we could define `Section` as a separate class:
+```python
+class Section:
+    def __init__(self, section):
+        self.section = section
+
+    def get_sec(self):
+        return self.section
+
+class Student:
+    def __init__(self, name, age, section):
+        self.name = name
+        self.age = age
+        self.section = Section(section)
+```
+This approach provides more flexibility if `Section` needs to be used independently.
+
+## **Conclusion**
+Using an inner class in this example helps encapsulate the section details within the `Student` class. This is useful when a class's data should not be exposed globally but only within its parent class.

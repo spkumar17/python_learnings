@@ -95,7 +95,7 @@ course1.add_student(student2)  # Output: Bob has been added to Math.
 This script is an excellent example of how classes and objects work together in Python, making it useful for beginners learning OOP principles.
 
 
-```
+``` python
 class Student:
     def __init__(self, name, age):
         self.name = name
